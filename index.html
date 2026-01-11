@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Password Request NPL Batch-10</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<style>
+body {
+  font-family: Arial, sans-serif;
+  background: #f4f6f8;
+  padding: 20px;
+}
+.container {
+  max-width: 420px;
+  margin: auto;
+  background: #ffffff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+h2 { text-align: center; }
+label { font-weight: bold; }
+
+input[type="text"], input[type="tel"] {
+  width: 100%;
+  padding: 10px;
+  margin: 5px 0 15px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  text-transform: uppercase;
+}
+
+.consent {
+  font-size: 13px;
+  margin-bottom: 15px;
+}
+
+button {
+  width: 100%;
+  padding: 12px;
+  background: #25D366;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+button.enabled {
+  cursor: pointer;
+  opacity: 1;
+}
+
+.note {
+  font-size: 12px;
+  color: #666;
+  text-align: center;
+  margin-top: 10px;
+}
+
+/* ===== STATUS ICON ===== */
+.statusIcon {
+  text-align: center;
+  margin-bottom: 15px;
+  animation: fadeIn 0.4s ease;
+}
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.ref {
+  font-weight: bold;
+  margin-top: 10px;
+}
+
+/* ===== TRADEMARK ===== */
+.trademark {
+  text-align: center;
+  font-size: 11px;
+  color: #999;
+  margin-top: 25px;
+}
+</style>
+
+<script>
+var IS_SUBMITTED = false;
+var MAINTENANCE_MODE = false; // false = ON | true = OFF
+</script>
+</head>
+
+<body>
+
+<!-- MAINTENANCE -->
+<div class="container" id="maintenanceBox" style="display:none;text-align:center;">
+  <h2>🚧 Temporarily Unavailable</h2>
+  <p>
+    This request link is currently unavailable.<br><br>
+    Please contact the administrator.
+  </p>
+</div>
+
+<!-- FORM -->
+<div class="container" id="formBox">
+  <h2>🔐 Password Request NPL Batch-10</h2>
+
+  <form onsubmit="return validateAndSend();">
+    <label>Company Name</label>
+    <input type="text" id="company" required>
+
+    <label>Director Name</label>
+    <input type="text" id="director" required>
+
+    <label>Company Reg. No</label>
+    <input type="text" id="regno" required>
+
+    <label>Contact No</label>
+    <input type="tel" id="phone" placeholder="e.g. 60123456789" required>
+
+    <div class="consent">
+      <input type="checkbox" id="consent" onclick="toggleButton()">
+      By submitting this request, I acknowledge that I am requesting access to a
+      password issued by SINGER (M) SDN BHD / BERJAYA CREDIT SDN BHD and accept full
+      responsibility for its use. Unauthorized access or misuse may result in further
+      action.
+    </div>
+
+    <button type="submit" id="sendBtn" disabled>Send Request</button>
+  </form>
+
+  <div class="note">Request will be sent via WhatsApp</div>
+</div>
+
+<!-- REQUEST PREPARED -->
+<div class="container" id="successBox" style="display:none;text-align:center;">
+
+  <div class="statusIcon">
+    <svg width="60" height="60" viewBox="0 0 24 24" fill="none">
+      <path d="M6 2h8l4 4v16H6z" stroke="#555" stroke-width="1.5"/>
+      <path d="M14 2v4h4" stroke="#555" stroke-width="1.5"/>
+      <path d="M8 11h8M8 15h8" stroke="#555" stroke-width="1.5"/>
+    </svg>
+  </div>
+
+  <h2>Request Prepared</h2>
+
+  <div class="ref" id="refDisplay"></div>
+
+  <p style="font-size:12px;color:#666;">
+    Reference number is for tracking purposes only.
+  </p>
+
+  <p>
+    WhatsApp has been opened with your request details.<br><br>
+    <b>Please tap “Send” in WhatsApp to complete this request.</b><br><br>
+    After sending, you may safely close this page.
+  </p>
+</div>
+
+<!-- TRADEMARK -->
+<div class="trademark" id="trademark"></div>
+
+<script>
+/* ===== PAGE LOAD ===== */
+window.onload = function () {
+  if (MAINTENANCE_MODE) {
+    document.getElementById("formBox").style.display = "none";
+    document.getElementById("successBox").style.display = "none";
+    document.getElementById("maintenanceBox").style.display = "block";
+  }
+};
+
+/* ===== UI ===== */
+function toggleButton() {
+  var btn = document.getElementById("sendBtn");
+  btn.disabled = !document.getElementById("consent").checked;
+  btn.classList.toggle("enabled", !btn.disabled);
+}
+
+/* ===== REF ===== */
+function generateReference() {
+  var d = new Date();
+  return "NPL10-" +
+    d.getFullYear() +
+    String(d.getMonth()+1).padStart(2,"0") +
+    String(d.getDate()).padStart(2,"0") + "-" +
+    String(d.getHours()).padStart(2,"0") +
+    String(d.getMinutes()).padStart(2,"0") +
+    String(d.getSeconds()).padStart(2,"0");
+}
+
+/* ===== CLIENT INFO ===== */
+async function getClientInfo() {
+  let ip = "UNKNOWN";
+  try {
+    const r = await fetch("https://api.ipify.org?format=json");
+    const j = await r.json();
+    ip = j.ip;
+  } catch(e){}
+
+  return {
+    ip: ip,
+    ua: navigator.userAgent,
+    platform: navigator.platform,
+    lang: navigator.language
+  };
+}
+
+/* ===== SUBMIT ===== */
+function validateAndSend() {
+  if (IS_SUBMITTED) return false;
+
+  var phone = document.getElementById("phone").value.trim();
+  if (!/^\d{10,15}$/.test(phone)) {
+    alert("Please enter valid phone number (digits only).");
+    return false;
+  }
+
+  if (!document.getElementById("consent").checked) return false;
+
+  IS_SUBMITTED = true;
+  var btn = document.getElementById("sendBtn");
+  btn.disabled = true;
+  btn.innerText = "Preparing...";
+
+  sendWhatsApp();
+  return false;
+}
+
+async function sendWhatsApp() {
+  var company = document.getElementById("company").value.toUpperCase();
+  var director = document.getElementById("director").value.toUpperCase();
+  var regno = document.getElementById("regno").value.toUpperCase();
+  var phone = document.getElementById("phone").value;
+  var ref = generateReference();
+  var time = new Date().toLocaleString();
+
+  const client = await getClientInfo();
+
+  var msg =
+    "🔐 PASSWORD REQUEST NPL BATCH-10\n\n" +
+    "Time: " + time + "\n\n" +
+    "Company: " + company + "\n" +
+    "Director: " + director + "\n" +
+    "Reg No: " + regno + "\n" +
+    "Contact: " + phone + "\n\n" +
+    "Consent:\n" +
+    "By submitting this request, I acknowledge that I am requesting access to a " +
+    "password issued by SINGER (M) SDN BHD / BERJAYA CREDIT SDN BHD and accept full " +
+    "responsibility for its use. Unauthorized access or misuse may result in further " +
+    "action.\n\n" +
+    "Ref No: " + ref;
+
+  window.open(
+    "https://wa.me/60176701984?text=" + encodeURIComponent(msg),
+    "_blank"
+  );
+
+  logToGoogleSheet(
+    time, company, director, regno, phone, ref,
+    client.ip, client.ua, client.platform, client.lang
+  );
+
+  document.getElementById("formBox").style.display = "none";
+  document.getElementById("successBox").style.display = "block";
+  document.getElementById("refDisplay").innerText = "Reference No: " + ref;
+}
+
+/* ===== LOGGER ===== */
+function logToGoogleSheet(time, company, director, regno, phone, ref, ip, ua, platform, lang) {
+
+  const data = new URLSearchParams();
+  data.append("time", time);
+  data.append("company", company);
+  data.append("director", director);
+  data.append("regno", regno);
+  data.append("phone", phone);
+  data.append("ref", ref);
+  data.append("ip", ip);
+  data.append("ua", ua);
+  data.append("platform", platform);
+  data.append("lang", lang);
+
+  fetch("https://script.google.com/macros/s/AKfycbxboO1VSvBs1eHZzwD_dLedrm3dcGSofPHxrWQukHjriV9lnKfi0edXEqvfZiYXFwqB/exec", {
+    method: "POST",
+    body: data
+  });
+}
+
+/* ===== TRADEMARK AUTO ===== */
+(function () {
+  var year = new Date().getFullYear();
+  var domain = window.location.hostname || "yourdomain.com";
+  document.getElementById("trademark").innerText =
+    "© " + year + " " + domain + " · Authorized Access Only";
+})();
+</script>
+
+</body>
+</html>
+
