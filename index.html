@@ -3,225 +3,222 @@
 <head>
 <meta charset="UTF-8">
 <title>Password Request NPL Batch-10</title>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
 <style>
-  /* ===== GLOBAL VARIABLES & RESET ===== */
-  :root {
-    --primary-color: #25D366; /* WhatsApp Green */
-    --primary-hover: #1EBE5A;
-    --text-main: #1E293B;
-    --text-muted: #64748B;
-    --bg-body: #F1F5F9;
-    --bg-card: #FFFFFF;
-    --border-color: #E2E8F0;
-    --input-focus: rgba(37, 211, 102, 0.2);
-  }
+/* ===== GLOBAL STYLES ===== */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'Inter', sans-serif;
+}
 
-  * {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-  }
+body {
+  background: linear-gradient(135deg, #f6f8fd 0%, #f1f5f9 100%);
+  color: #334155;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
 
-  body {
-    font-family: 'Inter', sans-serif;
-    background-color: var(--bg-body);
-    color: var(--text-main);
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    padding: 20px;
-  }
+/* ===== CONTAINER ===== */
+.container {
+  width: 100%;
+  max-width: 450px;
+  background: #ffffff;
+  padding: 40px 30px;
+  border-radius: 20px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.06), 0 1px 3px rgba(0, 0, 0, 0.05);
+  position: relative;
+  overflow: hidden;
+  animation: slideUp 0.6s ease-out;
+}
 
-  /* ===== CONTAINER ===== */
-  .container {
-    width: 100%;
-    max-width: 450px;
-    background: var(--bg-card);
-    padding: 35px 30px;
-    border-radius: 16px;
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05), 0 1px 3px rgba(0,0,0,0.05);
-    transition: all 0.3s ease;
-  }
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
 
-  h2 { 
-    text-align: center; 
-    font-size: 20px;
-    font-weight: 700;
-    margin-bottom: 25px;
-    color: var(--text-main);
-  }
+h2 {
+  text-align: center;
+  color: #0f172a;
+  font-size: 22px;
+  font-weight: 700;
+  margin-bottom: 30px;
+  letter-spacing: -0.5px;
+}
 
-  /* ===== FORM ELEMENTS ===== */
-  .input-group {
-    margin-bottom: 18px;
-  }
+/* ===== FLOATING INPUT FIELDS ===== */
+.input-wrapper {
+  position: relative;
+  margin-bottom: 24px;
+}
 
-  label { 
-    display: block;
-    font-size: 13px;
-    font-weight: 600;
-    color: var(--text-main);
-    margin-bottom: 6px;
-  }
+.input-wrapper input {
+  width: 100%;
+  padding: 22px 16px 10px;
+  border: 1.5px solid #e2e8f0;
+  border-radius: 12px;
+  font-size: 15px;
+  font-weight: 500;
+  color: #1e293b;
+  background: #f8fafc;
+  outline: none;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+}
 
-  input[type="text"], input[type="tel"] {
-    width: 100%;
-    padding: 12px 15px;
-    font-size: 14px;
-    font-family: 'Inter', sans-serif;
-    border: 1.5px solid var(--border-color);
-    border-radius: 8px;
-    text-transform: uppercase;
-    background-color: #F8FAFC;
-    color: var(--text-main);
-    transition: all 0.2s ease;
-  }
+.input-wrapper label {
+  position: absolute;
+  left: 16px;
+  top: 16px;
+  font-size: 15px;
+  color: #64748b;
+  pointer-events: none;
+  transition: all 0.3s ease;
+}
 
-  input[type="text"]:focus, input[type="tel"]:focus {
-    outline: none;
-    border-color: var(--primary-color);
-    background-color: #FFFFFF;
-    box-shadow: 0 0 0 4px var(--input-focus);
-  }
+/* Float Label Animation */
+.input-wrapper input:focus,
+.input-wrapper input:not(:placeholder-shown) {
+  border-color: #3b82f6;
+  background: #ffffff;
+  box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.1);
+}
 
-  input::placeholder {
-    color: #94A3B8;
-    text-transform: none;
-  }
+.input-wrapper input:focus ~ label,
+.input-wrapper input:not(:placeholder-shown) ~ label {
+  top: 8px;
+  font-size: 11px;
+  font-weight: 600;
+  color: #3b82f6;
+  letter-spacing: 0.5px;
+}
 
-  /* ===== CONSENT CHECKBOX ===== */
-  .consent-wrapper {
-    display: flex;
-    align-items: flex-start;
-    gap: 12px;
-    background: #F8FAFC;
-    padding: 15px;
-    border-radius: 8px;
-    border: 1px solid var(--border-color);
-    margin-bottom: 25px;
-    margin-top: 10px;
-  }
+/* ===== CUSTOM CHECKBOX ===== */
+.consent-group {
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 24px;
+  background: #f8fafc;
+  padding: 15px;
+  border-radius: 12px;
+  border: 1px solid #e2e8f0;
+}
 
-  .consent-wrapper input[type="checkbox"] {
-    margin-top: 3px;
-    width: 18px;
-    height: 18px;
-    accent-color: var(--primary-color);
-    cursor: pointer;
-    flex-shrink: 0;
-  }
+.consent-group input[type="checkbox"] {
+  width: 20px;
+  height: 20px;
+  margin-top: 2px;
+  margin-right: 12px;
+  accent-color: #25D366;
+  cursor: pointer;
+  flex-shrink: 0;
+}
 
-  .consent-text {
-    font-size: 12px;
-    line-height: 1.6;
-    color: var(--text-muted);
-  }
+.consent-text {
+  font-size: 12px;
+  color: #64748b;
+  line-height: 1.6;
+}
 
-  /* ===== BUTTON ===== */
-  button {
-    width: 100%;
-    padding: 14px;
-    background: var(--primary-color);
-    color: white;
-    border: none;
-    border-radius: 8px;
-    font-size: 15px;
-    font-weight: 600;
-    cursor: not-allowed;
-    opacity: 0.5;
-    transition: all 0.3s ease;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 8px;
-  }
+/* ===== BUTTON ===== */
+button {
+  width: 100%;
+  padding: 16px;
+  background: #cbd5e1;
+  color: #ffffff;
+  border: none;
+  border-radius: 12px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: not-allowed;
+  transition: all 0.3s ease;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
 
-  button.enabled {
-    cursor: pointer;
-    opacity: 1;
-    box-shadow: 0 4px 12px rgba(37, 211, 102, 0.3);
-  }
+button.enabled {
+  background: linear-gradient(135deg, #25D366 0%, #128C7E 100%);
+  cursor: pointer;
+  box-shadow: 0 10px 20px rgba(37, 211, 102, 0.2);
+}
 
-  button.enabled:hover {
-    background: var(--primary-hover);
-    transform: translateY(-1px);
-  }
+button.enabled:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 24px rgba(37, 211, 102, 0.3);
+}
 
-  button.enabled:active {
-    transform: translateY(1px);
-  }
+button.enabled:active {
+  transform: translateY(0);
+}
 
-  .note {
-    font-size: 12px;
-    color: var(--text-muted);
-    text-align: center;
-    margin-top: 15px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 5px;
-  }
+.note {
+  font-size: 12px;
+  color: #94a3b8;
+  text-align: center;
+  margin-top: 16px;
+  font-weight: 500;
+}
 
-  /* ===== SUCCESS & MAINTENANCE STATUS ===== */
-  .statusIcon {
-    text-align: center;
-    margin-bottom: 20px;
-    animation: bounceIn 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-  }
+/* ===== SUCCESS STATE ===== */
+.statusIcon {
+  width: 70px;
+  height: 70px;
+  background: #f0fdf4;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 20px;
+  animation: scaleIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
 
-  @keyframes bounceIn {
-    0% { transform: scale(0); opacity: 0; }
-    50% { transform: scale(1.1); }
-    100% { transform: scale(1); opacity: 1; }
-  }
+@keyframes scaleIn {
+  from { transform: scale(0); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
 
-  .ref-badge {
-    background: #E2E8F0;
-    color: #0F172A;
-    padding: 8px 16px;
-    border-radius: 20px;
-    font-weight: 700;
-    font-family: monospace;
-    font-size: 16px;
-    display: inline-block;
-    margin: 15px 0;
-    letter-spacing: 0.5px;
-  }
+.ref {
+  font-size: 18px;
+  font-weight: 700;
+  color: #0f172a;
+  background: #f1f5f9;
+  padding: 12px;
+  border-radius: 8px;
+  display: inline-block;
+  margin: 15px 0;
+  letter-spacing: 1px;
+}
 
-  .success-text {
-    font-size: 14px;
-    color: var(--text-main);
-    line-height: 1.6;
-    margin-top: 10px;
-  }
+#successBox p {
+  color: #475569;
+  font-size: 14px;
+  line-height: 1.6;
+}
 
-  /* ===== TRADEMARK ===== */
-  .trademark {
-    text-align: center;
-    font-size: 12px;
-    color: #94A3B8;
-    margin-top: 30px;
-    font-weight: 500;
-  }
+#successBox b {
+  color: #0f172a;
+}
 
-  /* ===== MOBILE OPTIMIZATION ===== */
-  @media (max-width: 480px) {
-    .container {
-      padding: 25px 20px;
-      border-radius: 12px;
-    }
-    h2 { font-size: 18px; }
-    input[type="text"], input[type="tel"] { font-size: 16px; /* Prevents auto-zoom on iOS Safari */ }
-  }
+/* ===== TRADEMARK ===== */
+.trademark {
+  text-align: center;
+  font-size: 12px;
+  color: #94a3b8;
+  margin-top: 30px;
+  font-weight: 500;
+}
 </style>
 
 <script>
-// Do not modify these core variables
 var IS_SUBMITTED = false;
 var MAINTENANCE_MODE = false; // false = ON | true = OFF
 </script>
@@ -230,43 +227,44 @@ var MAINTENANCE_MODE = false; // false = ON | true = OFF
 <body>
 
 <div class="container" id="maintenanceBox" style="display:none;text-align:center;">
-  <div class="statusIcon">
-    <svg width="64" height="64" viewBox="0 0 24 24" fill="none">
-      <path d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" stroke="#F59E0B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+  <div class="statusIcon" style="background: #fef2f2;">
+    <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#ef4444" stroke-width="2">
+      <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0zM12 9v4m0 4h.01"/>
     </svg>
   </div>
   <h2>Temporarily Unavailable</h2>
-  <p style="font-size: 14px; color: var(--text-muted); line-height: 1.5;">
+  <p style="color:#64748b; font-size: 14px; line-height: 1.6;">
     This request link is currently undergoing maintenance.<br><br>
     Please contact the administrator for assistance.
   </p>
 </div>
 
 <div class="container" id="formBox">
-  <h2>🔐 Password Request NPL Batch-10</h2>
+  <h2>🔐 Password Request<br><span style="font-size:16px;color:#64748b;font-weight:500;">NPL Batch-10</span></h2>
 
   <form onsubmit="return validateAndSend();">
-    <div class="input-group">
+    
+    <div class="input-wrapper">
+      <input type="text" id="company" placeholder=" " required>
       <label>Company Name</label>
-      <input type="text" id="company" required>
     </div>
 
-    <div class="input-group">
+    <div class="input-wrapper">
+      <input type="text" id="director" placeholder=" " required>
       <label>Director Name</label>
-      <input type="text" id="director" required>
     </div>
 
-    <div class="input-group">
+    <div class="input-wrapper">
+      <input type="text" id="regno" placeholder=" " required>
       <label>Company Reg. No</label>
-      <input type="text" id="regno" required>
     </div>
 
-    <div class="input-group">
-      <label>Contact No</label>
-      <input type="tel" id="phone" placeholder="e.g. 60123456789" required>
+    <div class="input-wrapper">
+      <input type="tel" id="phone" placeholder=" " required>
+      <label>Contact No (e.g. 60123456789)</label>
     </div>
 
-    <div class="consent-wrapper">
+    <div class="consent-group">
       <input type="checkbox" id="consent" onclick="toggleButton()">
       <div class="consent-text">
         By submitting this request, I acknowledge that I am requesting access to a
@@ -276,37 +274,39 @@ var MAINTENANCE_MODE = false; // false = ON | true = OFF
     </div>
 
     <button type="submit" id="sendBtn" disabled>
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <line x1="22" y1="2" x2="11" y2="13"></line>
+        <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+      </svg>
       Send Request
     </button>
   </form>
 
-  <div class="note">
-    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg>
-    Request will be sent via WhatsApp
-  </div>
+  <div class="note">Encrypted request will be sent via WhatsApp</div>
 </div>
 
 <div class="container" id="successBox" style="display:none;text-align:center;">
   <div class="statusIcon">
-    <svg width="70" height="70" viewBox="0 0 24 24" fill="none">
-      <path d="M9 12L11 14L15 10M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12Z" stroke="#25D366" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    <svg width="35" height="35" viewBox="0 0 24 24" fill="none" stroke="#16a34a" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+      <polyline points="20 6 9 17 4 12"></polyline>
     </svg>
   </div>
 
   <h2>Request Prepared</h2>
 
-  <div class="ref-badge" id="refDisplay"></div>
+  <div class="ref" id="refDisplay"></div>
 
-  <p style="font-size:12px;color:var(--text-muted); margin-bottom: 20px;">
+  <p style="font-size:12px;color:#94a3b8;margin-top:-5px;margin-bottom:20px;">
     Reference number is for tracking purposes only.
   </p>
 
-  <div class="success-text">
-    WhatsApp has been opened with your request details.<br><br>
-    <b>Please tap “Send” in WhatsApp to complete this request.</b><br><br>
-    <span style="color:var(--text-muted); font-size: 13px;">After sending, you may safely close this page.</span>
+  <div style="background: #f8fafc; padding: 20px; border-radius: 12px; border: 1px dashed #cbd5e1;">
+    <p>WhatsApp has been opened with your request details.</p>
+    <br>
+    <p><b>Please tap “Send” in WhatsApp to complete this request.</b></p>
   </div>
+  
+  <p style="margin-top: 20px; font-size: 13px;">After sending, you may safely close this page.</p>
 </div>
 
 <div class="trademark" id="trademark"></div>
@@ -324,14 +324,8 @@ window.onload = function () {
 /* ===== UI ===== */
 function toggleButton() {
   var btn = document.getElementById("sendBtn");
-  var icon = '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>';
-  
   btn.disabled = !document.getElementById("consent").checked;
   btn.classList.toggle("enabled", !btn.disabled);
-  
-  if(!btn.disabled) {
-    btn.innerHTML = icon + " Send Request";
-  }
 }
 
 /* ===== REF ===== */
@@ -378,7 +372,7 @@ function validateAndSend() {
   IS_SUBMITTED = true;
   var btn = document.getElementById("sendBtn");
   btn.disabled = true;
-  btn.innerHTML = "Preparing..."; // Changed from innerText to innerHTML to clear SVG
+  btn.innerHTML = "Preparing...";
 
   sendWhatsApp();
   return false;
@@ -420,12 +414,11 @@ async function sendWhatsApp() {
 
   document.getElementById("formBox").style.display = "none";
   document.getElementById("successBox").style.display = "block";
-  document.getElementById("refDisplay").innerText = ref;
+  document.getElementById("refDisplay").innerText = "Ref: " + ref;
 }
 
 /* ===== LOGGER ===== */
 function logToGoogleSheet(time, company, director, regno, phone, ref, ip, ua, platform, lang) {
-
   const data = new URLSearchParams();
   data.append("time", time);
   data.append("company", company);
