@@ -3,218 +3,84 @@
 <head>
 <meta charset="UTF-8">
 <title>Password Request NPL Batch-10</title>
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 
 <style>
-/* ===== GLOBAL STYLES ===== */
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-  font-family: 'Inter', sans-serif;
-}
-
 body {
-  background: linear-gradient(135deg, #f6f8fd 0%, #f1f5f9 100%);
-  color: #334155;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
+  font-family: Arial, sans-serif;
+  background: #f4f6f8;
   padding: 20px;
 }
-
-/* ===== CONTAINER ===== */
 .container {
-  width: 100%;
-  max-width: 450px;
+  max-width: 420px;
+  margin: auto;
   background: #ffffff;
-  padding: 40px 30px;
-  border-radius: 20px;
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.06), 0 1px 3px rgba(0, 0, 0, 0.05);
-  position: relative;
-  overflow: hidden;
-  animation: slideUp 0.6s ease-out;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
 }
+h2 { text-align: center; }
+label { font-weight: bold; }
 
-@keyframes slideUp {
-  from { opacity: 0; transform: translateY(20px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-h2 {
-  text-align: center;
-  color: #0f172a;
-  font-size: 22px;
-  font-weight: 700;
-  margin-bottom: 30px;
-  letter-spacing: -0.5px;
-}
-
-/* ===== FLOATING INPUT FIELDS ===== */
-.input-wrapper {
-  position: relative;
-  margin-bottom: 24px;
-}
-
-.input-wrapper input {
+input[type="text"], input[type="tel"] {
   width: 100%;
-  padding: 22px 16px 10px;
-  border: 1.5px solid #e2e8f0;
-  border-radius: 12px;
-  font-size: 15px;
-  font-weight: 500;
-  color: #1e293b;
-  background: #f8fafc;
-  outline: none;
-  transition: all 0.3s ease;
+  padding: 10px;
+  margin: 5px 0 15px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
   text-transform: uppercase;
 }
 
-.input-wrapper label {
-  position: absolute;
-  left: 16px;
-  top: 16px;
-  font-size: 15px;
-  color: #64748b;
-  pointer-events: none;
-  transition: all 0.3s ease;
+.consent {
+  font-size: 13px;
+  margin-bottom: 15px;
 }
 
-/* Float Label Animation */
-.input-wrapper input:focus,
-.input-wrapper input:not(:placeholder-shown) {
-  border-color: #3b82f6;
-  background: #ffffff;
-  box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.1);
-}
-
-.input-wrapper input:focus ~ label,
-.input-wrapper input:not(:placeholder-shown) ~ label {
-  top: 8px;
-  font-size: 11px;
-  font-weight: 600;
-  color: #3b82f6;
-  letter-spacing: 0.5px;
-}
-
-/* ===== CUSTOM CHECKBOX ===== */
-.consent-group {
-  display: flex;
-  align-items: flex-start;
-  margin-bottom: 24px;
-  background: #f8fafc;
-  padding: 15px;
-  border-radius: 12px;
-  border: 1px solid #e2e8f0;
-}
-
-.consent-group input[type="checkbox"] {
-  width: 20px;
-  height: 20px;
-  margin-top: 2px;
-  margin-right: 12px;
-  accent-color: #25D366;
-  cursor: pointer;
-  flex-shrink: 0;
-}
-
-.consent-text {
-  font-size: 12px;
-  color: #64748b;
-  line-height: 1.6;
-}
-
-/* ===== BUTTON ===== */
 button {
   width: 100%;
-  padding: 16px;
-  background: #cbd5e1;
-  color: #ffffff;
+  padding: 12px;
+  background: #25D366;
+  color: white;
   border: none;
-  border-radius: 12px;
+  border-radius: 5px;
   font-size: 16px;
-  font-weight: 600;
   cursor: not-allowed;
-  transition: all 0.3s ease;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 10px;
+  opacity: 0.6;
 }
-
 button.enabled {
-  background: linear-gradient(135deg, #25D366 0%, #128C7E 100%);
   cursor: pointer;
-  box-shadow: 0 10px 20px rgba(37, 211, 102, 0.2);
-}
-
-button.enabled:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 12px 24px rgba(37, 211, 102, 0.3);
-}
-
-button.enabled:active {
-  transform: translateY(0);
+  opacity: 1;
 }
 
 .note {
   font-size: 12px;
-  color: #94a3b8;
+  color: #666;
   text-align: center;
-  margin-top: 16px;
-  font-weight: 500;
+  margin-top: 10px;
 }
 
-/* ===== SUCCESS STATE ===== */
+/* ===== STATUS ICON ===== */
 .statusIcon {
-  width: 70px;
-  height: 70px;
-  background: #f0fdf4;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin: 0 auto 20px;
-  animation: scaleIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  text-align: center;
+  margin-bottom: 15px;
+  animation: fadeIn 0.4s ease;
 }
-
-@keyframes scaleIn {
-  from { transform: scale(0); opacity: 0; }
-  to { transform: scale(1); opacity: 1; }
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
 }
 
 .ref {
-  font-size: 18px;
-  font-weight: 700;
-  color: #0f172a;
-  background: #f1f5f9;
-  padding: 12px;
-  border-radius: 8px;
-  display: inline-block;
-  margin: 15px 0;
-  letter-spacing: 1px;
-}
-
-#successBox p {
-  color: #475569;
-  font-size: 14px;
-  line-height: 1.6;
-}
-
-#successBox b {
-  color: #0f172a;
+  font-weight: bold;
+  margin-top: 10px;
 }
 
 /* ===== TRADEMARK ===== */
 .trademark {
   text-align: center;
-  font-size: 12px;
-  color: #94a3b8;
-  margin-top: 30px;
-  font-weight: 500;
+  font-size: 11px;
+  color: #999;
+  margin-top: 25px;
 }
 </style>
 
@@ -226,69 +92,54 @@ var MAINTENANCE_MODE = false; // false = ON | true = OFF
 
 <body>
 
+<!-- MAINTENANCE -->
 <div class="container" id="maintenanceBox" style="display:none;text-align:center;">
-  <div class="statusIcon" style="background: #fef2f2;">
-    <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#ef4444" stroke-width="2">
-      <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0zM12 9v4m0 4h.01"/>
-    </svg>
-  </div>
-  <h2>Temporarily Unavailable</h2>
-  <p style="color:#64748b; font-size: 14px; line-height: 1.6;">
-    This request link is currently undergoing maintenance.<br><br>
-    Please contact the administrator for assistance.
+  <h2>🚧 Temporarily Unavailable</h2>
+  <p>
+    This request link is currently unavailable.<br><br>
+    Please contact the administrator.
   </p>
 </div>
 
+<!-- FORM -->
 <div class="container" id="formBox">
-  <h2>🔐 Password Request<br><span style="font-size:16px;color:#64748b;font-weight:500;">NPL Batch-10</span></h2>
+  <h2>🔐 Password Request NPL Batch-10</h2>
 
   <form onsubmit="return validateAndSend();">
-    
-    <div class="input-wrapper">
-      <input type="text" id="company" placeholder=" " required>
-      <label>Company Name</label>
-    </div>
+    <label>Company Name</label>
+    <input type="text" id="company" required>
 
-    <div class="input-wrapper">
-      <input type="text" id="director" placeholder=" " required>
-      <label>Director Name</label>
-    </div>
+    <label>Director Name</label>
+    <input type="text" id="director" required>
 
-    <div class="input-wrapper">
-      <input type="text" id="regno" placeholder=" " required>
-      <label>Company Reg. No</label>
-    </div>
+    <label>Company Reg. No</label>
+    <input type="text" id="regno" required>
 
-    <div class="input-wrapper">
-      <input type="tel" id="phone" placeholder=" " required>
-      <label>Contact No (e.g. 60123456789)</label>
-    </div>
+    <label>Contact No</label>
+    <input type="tel" id="phone" placeholder="e.g. 60123456789" required>
 
-    <div class="consent-group">
+    <div class="consent">
       <input type="checkbox" id="consent" onclick="toggleButton()">
-      <div class="consent-text">
-        By submitting this request, I acknowledge that I am requesting access to a
-        password issued by <b>SINGER (M) SDN BHD / BERJAYA CREDIT SDN BHD</b> and accept full
-        responsibility for its use. Unauthorized access or misuse may result in further action.
-      </div>
+      By submitting this request, I acknowledge that I am requesting access to a
+      password issued by SINGER (M) SDN BHD / BERJAYA CREDIT SDN BHD and accept full
+      responsibility for its use. Unauthorized access or misuse may result in further
+      action.
     </div>
 
-    <button type="submit" id="sendBtn" disabled>
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <line x1="22" y1="2" x2="11" y2="13"></line>
-        <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
-      </svg>
-      Send Request
-    </button>
+    <button type="submit" id="sendBtn" disabled>Send Request</button>
   </form>
 
-  <div class="note">Encrypted request will be sent via WhatsApp</div>
+  <div class="note">Request will be sent via WhatsApp</div>
 </div>
 
+<!-- REQUEST PREPARED -->
 <div class="container" id="successBox" style="display:none;text-align:center;">
+
   <div class="statusIcon">
-    <svg width="35" height="35" viewBox="0 0 24 24" fill="none" stroke="#16a34a" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-      <polyline points="20 6 9 17 4 12"></polyline>
+    <svg width="60" height="60" viewBox="0 0 24 24" fill="none">
+      <path d="M6 2h8l4 4v16H6z" stroke="#555" stroke-width="1.5"/>
+      <path d="M14 2v4h4" stroke="#555" stroke-width="1.5"/>
+      <path d="M8 11h8M8 15h8" stroke="#555" stroke-width="1.5"/>
     </svg>
   </div>
 
@@ -296,19 +147,18 @@ var MAINTENANCE_MODE = false; // false = ON | true = OFF
 
   <div class="ref" id="refDisplay"></div>
 
-  <p style="font-size:12px;color:#94a3b8;margin-top:-5px;margin-bottom:20px;">
+  <p style="font-size:12px;color:#666;">
     Reference number is for tracking purposes only.
   </p>
 
-  <div style="background: #f8fafc; padding: 20px; border-radius: 12px; border: 1px dashed #cbd5e1;">
-    <p>WhatsApp has been opened with your request details.</p>
-    <br>
-    <p><b>Please tap “Send” in WhatsApp to complete this request.</b></p>
-  </div>
-  
-  <p style="margin-top: 20px; font-size: 13px;">After sending, you may safely close this page.</p>
+  <p>
+    WhatsApp has been opened with your request details.<br><br>
+    <b>Please tap “Send” in WhatsApp to complete this request.</b><br><br>
+    After sending, you may safely close this page.
+  </p>
 </div>
 
+<!-- TRADEMARK -->
 <div class="trademark" id="trademark"></div>
 
 <script>
@@ -372,7 +222,7 @@ function validateAndSend() {
   IS_SUBMITTED = true;
   var btn = document.getElementById("sendBtn");
   btn.disabled = true;
-  btn.innerHTML = "Preparing...";
+  btn.innerText = "Preparing...";
 
   sendWhatsApp();
   return false;
@@ -414,11 +264,12 @@ async function sendWhatsApp() {
 
   document.getElementById("formBox").style.display = "none";
   document.getElementById("successBox").style.display = "block";
-  document.getElementById("refDisplay").innerText = "Ref: " + ref;
+  document.getElementById("refDisplay").innerText = "Reference No: " + ref;
 }
 
 /* ===== LOGGER ===== */
 function logToGoogleSheet(time, company, director, regno, phone, ref, ip, ua, platform, lang) {
+
   const data = new URLSearchParams();
   data.append("time", time);
   data.append("company", company);
