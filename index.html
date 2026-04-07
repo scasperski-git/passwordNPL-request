@@ -4,87 +4,224 @@
 <meta charset="UTF-8">
 <title>Password Request NPL Batch-10</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 
 <style>
-body {
-  font-family: Arial, sans-serif;
-  background: #f4f6f8;
-  padding: 20px;
-}
-.container {
-  max-width: 420px;
-  margin: auto;
-  background: #ffffff;
-  padding: 20px;
-  border-radius: 8px;
-  box-shadow: 0 0 10px rgba(0,0,0,0.1);
-}
-h2 { text-align: center; }
-label { font-weight: bold; }
+  /* ===== GLOBAL VARIABLES & RESET ===== */
+  :root {
+    --primary-color: #25D366; /* WhatsApp Green */
+    --primary-hover: #1EBE5A;
+    --text-main: #1E293B;
+    --text-muted: #64748B;
+    --bg-body: #F1F5F9;
+    --bg-card: #FFFFFF;
+    --border-color: #E2E8F0;
+    --input-focus: rgba(37, 211, 102, 0.2);
+  }
 
-input[type="text"], input[type="tel"] {
-  width: 100%;
-  padding: 10px;
-  margin: 5px 0 15px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  text-transform: uppercase;
-}
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
 
-.consent {
-  font-size: 13px;
-  margin-bottom: 15px;
-}
+  body {
+    font-family: 'Inter', sans-serif;
+    background-color: var(--bg-body);
+    color: var(--text-main);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+  }
 
-button {
-  width: 100%;
-  padding: 12px;
-  background: #25D366;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  font-size: 16px;
-  cursor: not-allowed;
-  opacity: 0.6;
-}
-button.enabled {
-  cursor: pointer;
-  opacity: 1;
-}
+  /* ===== CONTAINER ===== */
+  .container {
+    width: 100%;
+    max-width: 450px;
+    background: var(--bg-card);
+    padding: 35px 30px;
+    border-radius: 16px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05), 0 1px 3px rgba(0,0,0,0.05);
+    transition: all 0.3s ease;
+  }
 
-.note {
-  font-size: 12px;
-  color: #666;
-  text-align: center;
-  margin-top: 10px;
-}
+  h2 { 
+    text-align: center; 
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 25px;
+    color: var(--text-main);
+  }
 
-/* ===== STATUS ICON ===== */
-.statusIcon {
-  text-align: center;
-  margin-bottom: 15px;
-  animation: fadeIn 0.4s ease;
-}
-@keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
-}
+  /* ===== FORM ELEMENTS ===== */
+  .input-group {
+    margin-bottom: 18px;
+  }
 
-.ref {
-  font-weight: bold;
-  margin-top: 10px;
-}
+  label { 
+    display: block;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text-main);
+    margin-bottom: 6px;
+  }
 
-/* ===== TRADEMARK ===== */
-.trademark {
-  text-align: center;
-  font-size: 11px;
-  color: #999;
-  margin-top: 25px;
-}
+  input[type="text"], input[type="tel"] {
+    width: 100%;
+    padding: 12px 15px;
+    font-size: 14px;
+    font-family: 'Inter', sans-serif;
+    border: 1.5px solid var(--border-color);
+    border-radius: 8px;
+    text-transform: uppercase;
+    background-color: #F8FAFC;
+    color: var(--text-main);
+    transition: all 0.2s ease;
+  }
+
+  input[type="text"]:focus, input[type="tel"]:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    background-color: #FFFFFF;
+    box-shadow: 0 0 0 4px var(--input-focus);
+  }
+
+  input::placeholder {
+    color: #94A3B8;
+    text-transform: none;
+  }
+
+  /* ===== CONSENT CHECKBOX ===== */
+  .consent-wrapper {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    background: #F8FAFC;
+    padding: 15px;
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
+    margin-bottom: 25px;
+    margin-top: 10px;
+  }
+
+  .consent-wrapper input[type="checkbox"] {
+    margin-top: 3px;
+    width: 18px;
+    height: 18px;
+    accent-color: var(--primary-color);
+    cursor: pointer;
+    flex-shrink: 0;
+  }
+
+  .consent-text {
+    font-size: 12px;
+    line-height: 1.6;
+    color: var(--text-muted);
+  }
+
+  /* ===== BUTTON ===== */
+  button {
+    width: 100%;
+    padding: 14px;
+    background: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: not-allowed;
+    opacity: 0.5;
+    transition: all 0.3s ease;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+  }
+
+  button.enabled {
+    cursor: pointer;
+    opacity: 1;
+    box-shadow: 0 4px 12px rgba(37, 211, 102, 0.3);
+  }
+
+  button.enabled:hover {
+    background: var(--primary-hover);
+    transform: translateY(-1px);
+  }
+
+  button.enabled:active {
+    transform: translateY(1px);
+  }
+
+  .note {
+    font-size: 12px;
+    color: var(--text-muted);
+    text-align: center;
+    margin-top: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+  }
+
+  /* ===== SUCCESS & MAINTENANCE STATUS ===== */
+  .statusIcon {
+    text-align: center;
+    margin-bottom: 20px;
+    animation: bounceIn 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  }
+
+  @keyframes bounceIn {
+    0% { transform: scale(0); opacity: 0; }
+    50% { transform: scale(1.1); }
+    100% { transform: scale(1); opacity: 1; }
+  }
+
+  .ref-badge {
+    background: #E2E8F0;
+    color: #0F172A;
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-weight: 700;
+    font-family: monospace;
+    font-size: 16px;
+    display: inline-block;
+    margin: 15px 0;
+    letter-spacing: 0.5px;
+  }
+
+  .success-text {
+    font-size: 14px;
+    color: var(--text-main);
+    line-height: 1.6;
+    margin-top: 10px;
+  }
+
+  /* ===== TRADEMARK ===== */
+  .trademark {
+    text-align: center;
+    font-size: 12px;
+    color: #94A3B8;
+    margin-top: 30px;
+    font-weight: 500;
+  }
+
+  /* ===== MOBILE OPTIMIZATION ===== */
+  @media (max-width: 480px) {
+    .container {
+      padding: 25px 20px;
+      border-radius: 12px;
+    }
+    h2 { font-size: 18px; }
+    input[type="text"], input[type="tel"] { font-size: 16px; /* Prevents auto-zoom on iOS Safari */ }
+  }
 </style>
 
 <script>
+// Do not modify these core variables
 var IS_SUBMITTED = false;
 var MAINTENANCE_MODE = false; // false = ON | true = OFF
 </script>
@@ -92,73 +229,86 @@ var MAINTENANCE_MODE = false; // false = ON | true = OFF
 
 <body>
 
-<!-- MAINTENANCE -->
 <div class="container" id="maintenanceBox" style="display:none;text-align:center;">
-  <h2>🚧 Temporarily Unavailable</h2>
-  <p>
-    This request link is currently unavailable.<br><br>
-    Please contact the administrator.
+  <div class="statusIcon">
+    <svg width="64" height="64" viewBox="0 0 24 24" fill="none">
+      <path d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" stroke="#F59E0B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+  </div>
+  <h2>Temporarily Unavailable</h2>
+  <p style="font-size: 14px; color: var(--text-muted); line-height: 1.5;">
+    This request link is currently undergoing maintenance.<br><br>
+    Please contact the administrator for assistance.
   </p>
 </div>
 
-<!-- FORM -->
 <div class="container" id="formBox">
   <h2>🔐 Password Request NPL Batch-10</h2>
 
   <form onsubmit="return validateAndSend();">
-    <label>Company Name</label>
-    <input type="text" id="company" required>
-
-    <label>Director Name</label>
-    <input type="text" id="director" required>
-
-    <label>Company Reg. No</label>
-    <input type="text" id="regno" required>
-
-    <label>Contact No</label>
-    <input type="tel" id="phone" placeholder="e.g. 60123456789" required>
-
-    <div class="consent">
-      <input type="checkbox" id="consent" onclick="toggleButton()">
-      By submitting this request, I acknowledge that I am requesting access to a
-      password issued by SINGER (M) SDN BHD / BERJAYA CREDIT SDN BHD and accept full
-      responsibility for its use. Unauthorized access or misuse may result in further
-      action.
+    <div class="input-group">
+      <label>Company Name</label>
+      <input type="text" id="company" required>
     </div>
 
-    <button type="submit" id="sendBtn" disabled>Send Request</button>
+    <div class="input-group">
+      <label>Director Name</label>
+      <input type="text" id="director" required>
+    </div>
+
+    <div class="input-group">
+      <label>Company Reg. No</label>
+      <input type="text" id="regno" required>
+    </div>
+
+    <div class="input-group">
+      <label>Contact No</label>
+      <input type="tel" id="phone" placeholder="e.g. 60123456789" required>
+    </div>
+
+    <div class="consent-wrapper">
+      <input type="checkbox" id="consent" onclick="toggleButton()">
+      <div class="consent-text">
+        By submitting this request, I acknowledge that I am requesting access to a
+        password issued by <b>SINGER (M) SDN BHD / BERJAYA CREDIT SDN BHD</b> and accept full
+        responsibility for its use. Unauthorized access or misuse may result in further action.
+      </div>
+    </div>
+
+    <button type="submit" id="sendBtn" disabled>
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
+      Send Request
+    </button>
   </form>
 
-  <div class="note">Request will be sent via WhatsApp</div>
+  <div class="note">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg>
+    Request will be sent via WhatsApp
+  </div>
 </div>
 
-<!-- REQUEST PREPARED -->
 <div class="container" id="successBox" style="display:none;text-align:center;">
-
   <div class="statusIcon">
-    <svg width="60" height="60" viewBox="0 0 24 24" fill="none">
-      <path d="M6 2h8l4 4v16H6z" stroke="#555" stroke-width="1.5"/>
-      <path d="M14 2v4h4" stroke="#555" stroke-width="1.5"/>
-      <path d="M8 11h8M8 15h8" stroke="#555" stroke-width="1.5"/>
+    <svg width="70" height="70" viewBox="0 0 24 24" fill="none">
+      <path d="M9 12L11 14L15 10M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12Z" stroke="#25D366" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
     </svg>
   </div>
 
   <h2>Request Prepared</h2>
 
-  <div class="ref" id="refDisplay"></div>
+  <div class="ref-badge" id="refDisplay"></div>
 
-  <p style="font-size:12px;color:#666;">
+  <p style="font-size:12px;color:var(--text-muted); margin-bottom: 20px;">
     Reference number is for tracking purposes only.
   </p>
 
-  <p>
+  <div class="success-text">
     WhatsApp has been opened with your request details.<br><br>
     <b>Please tap “Send” in WhatsApp to complete this request.</b><br><br>
-    After sending, you may safely close this page.
-  </p>
+    <span style="color:var(--text-muted); font-size: 13px;">After sending, you may safely close this page.</span>
+  </div>
 </div>
 
-<!-- TRADEMARK -->
 <div class="trademark" id="trademark"></div>
 
 <script>
@@ -174,8 +324,14 @@ window.onload = function () {
 /* ===== UI ===== */
 function toggleButton() {
   var btn = document.getElementById("sendBtn");
+  var icon = '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>';
+  
   btn.disabled = !document.getElementById("consent").checked;
   btn.classList.toggle("enabled", !btn.disabled);
+  
+  if(!btn.disabled) {
+    btn.innerHTML = icon + " Send Request";
+  }
 }
 
 /* ===== REF ===== */
@@ -222,7 +378,7 @@ function validateAndSend() {
   IS_SUBMITTED = true;
   var btn = document.getElementById("sendBtn");
   btn.disabled = true;
-  btn.innerText = "Preparing...";
+  btn.innerHTML = "Preparing..."; // Changed from innerText to innerHTML to clear SVG
 
   sendWhatsApp();
   return false;
@@ -264,7 +420,7 @@ async function sendWhatsApp() {
 
   document.getElementById("formBox").style.display = "none";
   document.getElementById("successBox").style.display = "block";
-  document.getElementById("refDisplay").innerText = "Reference No: " + ref;
+  document.getElementById("refDisplay").innerText = ref;
 }
 
 /* ===== LOGGER ===== */
@@ -299,4 +455,3 @@ function logToGoogleSheet(time, company, director, regno, phone, ref, ip, ua, pl
 
 </body>
 </html>
-
